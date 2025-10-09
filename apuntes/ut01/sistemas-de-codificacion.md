@@ -1,14 +1,14 @@
 # Sistemas de Codificación
 
-* Introducción
-* Sistemas de codificación numéricos
-  * Sistema binario
-  * Sistema hexadecimal
-* Sistemas de codificación de caracteres
-  * Codigo ASCII
-  * ASCII Extendido
-  * Unicode
-  * Codificación en Sitemas Windows
+* [Introducción](#introducción)
+* [Sistemas de codificación numéricos](#sistemas-de-codificación-numéricos)
+  * [Sistema binario](#sistema-binario)
+  * [Sistema hexadecimal](#sistema-hexadecimal)
+* [Sistemas de codificación de caracteres](#sistemas-de-codificación-de-caracteres)
+  * [Codigo ASCII](#codigo-ascii)
+  * [ASCII Extendido](#ascii-extendido)
+  * [Unicode](#unicode)
+* [Codificación en Sistemas Windows](#codificación-en-sistemas-windows)
 
 ## Introducción
 
