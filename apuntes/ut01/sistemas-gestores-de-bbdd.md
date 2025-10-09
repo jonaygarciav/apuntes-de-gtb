@@ -366,7 +366,7 @@ Utilizado en aplicaciones móviles (iOS y Android), navegadores web, software de
 
 ### SQL Server (Microsoft SQL Server)
 
-![][07]
+![][08]
 
 Descripción: SQL Server es un sistema de gestión de bases de datos relacional desarrollado por Microsoft. Es conocido por su integración con el ecosistema de productos de Microsoft y su capacidad para manejar datos a gran escala.
 Características:
@@ -382,7 +382,7 @@ Cada sistema de bases de datos tiene sus fortalezas y aplicaciones específicas,
 
 ### MongoDB
 
-![][08]
+![][09]
 
 __MongoDB__ es un sistema de base de datos NoSQL orientado a documentos. A diferencia de las bases de datos relacionales (SQL), MongoDB utiliza un modelo de datos flexible basado en documentos JSON (llamados BSON en MongoDB) en lugar de tablas y registros.
 Al ser NoSQL, permite una estructura de datos más flexible, lo que es ideal para manejar grandes volúmenes de datos que pueden no seguir un esquema rígido.
@@ -460,7 +460,7 @@ Ventajas de MongoDB:
 
 ### Redis
 
-![][09]
+![][10]
 
 __Redis__ (_Remote Dictionary Server_) es un sistema de gestión de bases de datos NoSQL en memoria, que se utiliza principalmente como base de datos, caché y broker de mensajes. Almacena los datos en clave-valor y es altamente eficiente debido a que los datos se gestionan principalmente en memoria RAM, lo que le proporciona un rendimiento extremadamente rápido.
 
