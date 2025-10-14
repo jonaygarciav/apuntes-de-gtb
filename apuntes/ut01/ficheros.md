@@ -3,6 +3,8 @@
 * [Ficheros](#ficheros)
   * [Ficheros Planos](#ficheros-planos)
   * [Ficheros Indexados](#ficheros-indexados)
+  * [Otros Ficheros](#otros-ficheros)
+    * [JSON](#json)
 
 ## Ficheros
 
@@ -225,3 +227,221 @@ Nodo derecho:
 * __Índice Hash__: acceso directo y rápido a los registros basados en la clave hash, pero requiere manejo de colisiones. 
 * __Índice B-tree__: estructura balanceada que permite búsquedas rápidas y eficientes, con nodos que almacenan datos y rutas.
 * __Índice B+ tree__: similar al B-tree, pero más eficiente para consultas secuenciales gracias a la conexión directa entre nodos hoja.
+
+
+### Otros Ficheros
+
+#### JSON
+
+__JSON__ (_JavaScript Object Notation_) es un formato de texto ligero y legible para el intercambio de datos. Es ampliamente utilizado en aplicaciones web y APIs para enviar datos estructurados entre un servidor y un cliente. Aunque se deriva de la sintaxis de JavaScript, _JSON_ es independiente del lenguaje de programación y es compatible con casi todos los lenguajes de programación modernos. _JSON_ fue desarrollado por Douglas Crockford a principios de la década de 2000 como una alternativa más simple y fácil de usar que _XML_ para la transferencia de datos en aplicaciones web. La facilidad de uso y la simplicidad de _JSON_, junto con su compatibilidad con JavaScript, lo hicieron rápidamente popular como el formato estándar para el intercambio de datos en la web.
+
+Características principales de JSON:
+* __Simplicidad y legibilidad__: JSON utiliza una estructura sencilla basada en pares clave-valor, listas y objetos anidados, lo que lo hace fácil de leer y escribir tanto para humanos como para máquinas.
+* __Independencia de lenguaje__: aunque JSON se deriva de JavaScript, se puede utilizar con casi cualquier lenguaje de programación, lo que lo convierte en un formato altamente interoperable.
+* __Estructura clara__: JSON tiene una sintaxis clara y estricta que define cómo se deben estructurar los datos, lo que facilita la validación y el procesamiento.
+
+Un archivo JSON está compuesto por:
+* __Objetos__: definidos por llaves {}, que contienen pares clave-valor.
+* __Arreglos__: listas de valores definidos por corchetes [].
+* __Pares clave-valor__: claves y valores separados por dos puntos :, donde las claves son cadenas y los valores pueden ser cadenas, números, booleanos, nulos, objetos o arreglos.
+
+Ejemplo básico de JSON:
+
+```
+{
+  "nombre": "Juan Pérez",
+  "edad": 30,
+  "esEstudiante": false,
+  "cursos": ["Matemáticas", "Física", "Programación"],
+  "direccion": {
+    "calle": "Calle Principal",
+    "ciudad": "Ciudad Ejemplo",
+    "codigoPostal": 12345
+  }
+}
+```
+
+__Objetos JSON__
+
+Los _objetos_ en _JSON_ son una colección de pares clave-valor. Se encierran entre llaves «{}» y cada clave se separa de su valor correspondiente por dos puntos «:». Los pares clave-valor se separan entre sí por comas «,».
+
+Un ejemplo de _objeto JSON_ lo podemos ver en el código siguiente:
+
+```
+{
+    'nombre': 'Facundo',
+    'edad': 30,
+    'ciudad': 'Madrid'
+}
+```
+
+Este _objeto_ JSON consta de tres pares clave-valor:
+
+* La clave _nombre_ tiene el valor _Facundo_.
+* La clave _edad_ es _30_.
+* La clave _ciudad_ tiene el valor _Madrid_.
+
+__Arreglos JSON__
+
+Los _arreglos_ o _arrays_ en _JSON_ son simples colecciones de elementos. Estos elementos pueden ser datos como números o cadenas pero también otros arreglos u objetos _JSON_.
+
+Los _arrays_ se encierran entre corchetes «[]» y los valores se separan entre sí por comas «,». Cada objeto en el array representa una persona, con información sobre su nombre, edad y ciudad donde vive:
+
+```
+[
+    {
+        'nombre': 'Facundo',
+        'edad': 30,
+        'ciudad': 'Madrid'
+    },
+    {
+        'nombre': 'Saturnina',
+        'edad': 98,
+        'ciudad': 'Barcelona'
+    },
+    {
+        'nombre': 'Adoración',
+        'edad': 55,
+        'ciudad': 'Sevilla'
+    }
+]
+```
+
+Aplicaciones comunes de JSON:
+* __Intercambio de Datos en APIs__: JSON es el formato más común para enviar y recibir datos entre un servidor y un cliente en aplicaciones web, especialmente en servicios RESTful.
+* __Configuración de aplicaciones__: JSON se utiliza frecuentemente para archivos de configuración debido a su legibilidad y facilidad de manipulación.
+* __Almacenamiento de datos__: algunas bases de datos NoSQL, como MongoDB, utilizan estructuras similares a JSON para almacenar datos de manera flexible.
+
+Ventajas de JSON:
+* __Ligero y eficiente__: JSON tiene una sintaxis concisa que facilita la transmisión de datos con menos sobrecarga en comparación con otros formatos.
+* __Fácil de analizar__: la mayoría de los lenguajes de programación ofrecen librerías y funciones integradas para analizar y generar JSON, lo que simplifica su uso en el desarrollo.
+* __Legibilidad__: a diferencia de formatos como XML, JSON es mucho más fácil de leer y escribir para los desarrolladores, lo que reduce los errores y facilita la depuración.
+
+Desventajas de JSON:
+* __Sin comentarios__: JSON no soporta comentarios, lo que puede dificultar la documentación de los datos directamente en el archivo.
+* __Menos estricto que XML__: JSON carece de validación de esquema incorporada, lo que significa que los datos mal formateados pueden causar errores durante el procesamiento.
+
+Comparación con otros formatos de datos:
+* __JSON vs CSV__: CSV es otro formato comúnmente utilizado para el intercambio de datos, especialmente útil para exportar información. Aunque CSV es simple y ligero, no es tan fácil de leer y asimilar qué función realiza cada dato. Además CSV no resulta nada flexible, porque las columnas siempre tienen una serie limitada y definida de valores. En cambio JSON soporta estructuras de datos complejas y variables entre sí. 
+
+A continuación, se muestra el código de un fichero en Python llamado `lee-json.py` que lee el archivo en formato JSON `usuarios.json` y lo muestra por pantalla:
+
+```
+import json
+
+# Nombre del fichero JSON que se va a leer
+nombre_fichero = 'usuarios.json'
+
+# Función para abrir y leer el fichero JSON
+def leer_fichero_json(fichero):
+    try:
+        # Abrir el fichero en modo lectura
+        with open(fichero, 'r', encoding='utf-8') as archivo:
+            # Cargar el contenido del JSON
+            datos = json.load(archivo)
+            
+            # Comprobar si los datos son una lista
+            if isinstance(datos, list):
+                print("Contenido del archivo JSON:")
+                # Iterar sobre cada elemento de la lista
+                for i, item in enumerate(datos, start=1):
+                    print(f"\nRegistro {i}:")
+                    for clave, valor in item.items():
+                        print(f"{clave}: {valor}")
+            else:
+                print("El contenido del JSON no es una lista.")
+                
+    except FileNotFoundError:
+        print(f"El archivo {fichero} no se encontró.")
+    except json.JSONDecodeError:
+        print("Error al decodificar el archivo JSON.")
+    except Exception as e:
+        print(f"Ocurrió un error: {e}")
+
+# Llamada a la función para leer el fichero JSON
+leer_fichero_json(nombre_fichero)
+```
+
+El programa `usuarios.json` tiene el siguiente contenido:
+
+```
+$ cat alumnos.json 
+[
+    {
+        "ID": 1,
+        "Nombre": "Juan Pérez",
+        "Correo": "juan.perez@mail.com",
+        "Fecha de Registro": "2024-09-15"
+    },
+    {
+        "ID": 2,
+        "Nombre": "María García",
+        "Correo": "maria.garcia@mail.com",
+        "Fecha de Registro": "2024-09-16"
+    },
+    {
+        "ID": 3,
+        "Nombre": "Carlos Sánchez",
+        "Correo": "carlos.sanchez@mail.com",
+        "Fecha de Registro": "2024-09-17"
+    },
+    {
+        "ID": 4,
+        "Nombre": "Ana López",
+        "Correo": "ana.lopez@mail.com",
+        "Fecha de Registro": "2024-09-18"
+    },
+    {
+        "ID": 5,
+        "Nombre": "Luis Fernández",
+        "Correo": "luis.fernandez@mail.com",
+        "Fecha de Registro": "2024-09-19"
+    }
+]
+```
+
+Una vez creados los archivos `lee-json.py` y `usuarios.json`, si listamos los archivos del directorio deberíamos ver lo siguiente:
+
+```
+$ ls -l 
+total 1552
+-rw-rw-r--  1 jonay jonay     753 sep 21 08:22  alumnos.json
+-rw-rw-r--  1 jonay jonay     903 sep 21 08:22  lee-json.py
+```
+
+La ejecución del programa `lee-json.py` sería la siguiente:
+
+```
+$ python3 lee-json.py 
+Contenido del archivo JSON:
+
+Registro 1:
+ID: 1
+Nombre: Juan Pérez
+Correo: juan.perez@mail.com
+Fecha de Registro: 2024-09-15
+
+Registro 2:
+ID: 2
+Nombre: María García
+Correo: maria.garcia@mail.com
+Fecha de Registro: 2024-09-16
+
+Registro 3:
+ID: 3
+Nombre: Carlos Sánchez
+Correo: carlos.sanchez@mail.com
+Fecha de Registro: 2024-09-17
+
+Registro 4:
+ID: 4
+Nombre: Ana López
+Correo: ana.lopez@mail.com
+Fecha de Registro: 2024-09-18
+
+Registro 5:
+ID: 5
+Nombre: Luis Fernández
+Correo: luis.fernandez@mail.com
+Fecha de Registro: 2024-09-19
+```
