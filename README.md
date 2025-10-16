@@ -11,4 +11,4 @@
 ## UT02: Diseño lógico de una Base de Datos
 
 * Modelo Entidad/Relación ([Apuntes](./apuntes/ut02/modelo-entidad-relacion.md))
-* Modelo Entidad/Relación Extendido ([Apuntes](./apuntes/ut02/modelo-entidad-relacion-extendido.md))
+* Modelo Entidad/Relación extendido ([Apuntes](./apuntes/ut02/modelo-entidad-relacion-extendido.md))
