@@ -193,7 +193,7 @@ cómo se relacionen estas entidades con el resto de entidades del diagrama.
 [05]: ../img/ut02/modelo-relacional/relacion-uno-a-muchos01.png "05"
 [06]: ../img/ut02/modelo-relacional/relacion-uno-a-muchos02.png "06"
 [07]: ../img/ut02/modelo-relacional/relacion-uno-a-uno01.png "07"
-[08]: ../img/ut02/modelo-relacional/relacion_uno-a-uno02.png "08"
+[08]: ../img/ut02/modelo-relacional/relacion-uno-a-uno02.png "08"
 [09]: ../img/ut02/modelo-relacional/relaciones-resumen.webp "09"
 [10]: ../img/ut02/modelo-relacional/relacion-recursiva01.png "10"
 [11]: ../img/ut02/modelo-relacional/relacion-recursiva02.png "11"
