@@ -13,3 +13,4 @@
 * Modelo Entidad/Relación ([Apuntes](./apuntes/ut02/modelo-entidad-relacion.md))
 * Modelo Entidad/Relación extendido ([Apuntes](./apuntes/ut02/modelo-entidad-relacion-extendido.md))
 * Modelo Relacional ([Apuntes](./apuntes/ut02/modelo-relacional.md))
+* Normalización ([Apuntes](./apuntes/ut02/normalizacion.md))
