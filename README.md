@@ -14,3 +14,11 @@
 * Modelo Entidad/Relación extendido ([Apuntes](./apuntes/ut02/modelo-entidad-relacion-extendido.md))
 * Modelo Relacional ([Apuntes](./apuntes/ut02/modelo-relacional.md))
 * Normalización ([Apuntes](./apuntes/ut02/normalizacion.md))
+
+## UT03: Instalación de MySQL
+
+* Instalación de Cliente/Servidor MySQL 8.4.7:
+    * Desplegar MySQL 8.4.7 en Docker:
+        * Elección de imágenes en Docker Hub ([Apuntes](./apuntes/ut03/mysql8.4.7/docker-mysql8.4.7-eleccion-imagenes.md))
+        * Desplegar un contenedor sin persistencia ([Apuntes](./apuntes/ut03/mysql8.4.7/docker-mysql8.4.7-sin-persistencia.md))
+        * Desplegar un contenedor con persistencia ([Apuntes](./apuntes/ut03/mysql8.4.7/docker-mysql8.4.7-con-persistencia.md))
