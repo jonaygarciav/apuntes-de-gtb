@@ -1,9 +1,9 @@
-# Desplegar un contenedor de MySQL 8.0 en Docker con acceso externo al Servicio del Contenedor
+# Desplegar un contenedor de MySQL 8.4.7 en Docker con acceso externo al Servicio del Contenedor
 
 Crear y ejecutar el contenedor MySQL con acceso externo:
 
 ```bash
-$ docker run -d --name mysql-8.0-srv4 -p 33306:3306 -e MYSQL_ROOT_PASSWORD=mysql8 mysql/mysql-server:8.0
+$ docker run -d --name mysql-8.4.7-srv4 -p 33306:3306 -e MYSQL_ROOT_PASSWORD=mysql8 mysql:8.4.7
 39a5d23773d23bcafbdd360bece4cff5a00d9e58d87c64a2cc5069650c494caa
 ```
 
@@ -14,20 +14,20 @@ Verificar el contenedor en ejecución:
 
 ```bash
 $ docker ps
-CONTAINER ID   IMAGE                    COMMAND                  CREATED          STATUS                    PORTS                                                            NAMES
-39a5d23773d2   mysql/mysql-server:8.0   "/entrypoint.sh mysq…"   53 seconds ago   Up 52 seconds (healthy)   33060-33061/tcp, 0.0.0.0:33306->3306/tcp, [::]:33306->3306/tcp   mysql-8.0-srv4
+CONTAINER ID   IMAGE         COMMAND                  CREATED          STATUS                    PORTS                                                            NAMES
+39a5d23773d2   mysql:8.4.7   "/entrypoint.sh mysq…"   53 seconds ago   Up 52 seconds (healthy)   33060-33061/tcp, 0.0.0.0:33306->3306/tcp, [::]:33306->3306/tcp   mysql-8.4.7-srv4
 ```
 
-Este comando muestra los contenedores en ejecución. Deberías ver que _mysql-8.0-srv4_ está activo y que el puerto 33306 está mapeado correctamente al puerto 3306 del contenedor.
+Este comando muestra los contenedores en ejecución. Deberías ver que _mysql-8.4.7-srv4_ está activo y que el puerto 33306 está mapeado correctamente al puerto 3306 del contenedor.
 
 Acceso al contenedor y configuración de permisos para acceso:
 
 ```bash
-$ docker exec -it mysql-8.0-srv4 mysql -u root -p
+$ docker exec -it mysql-8.4.7-srv4 mysql -u root -p
 Enter password:
 Welcome to the MySQL monitor.  Commands end with ; or \g.
 Your MySQL connection id is 10
-Server version: 8.0.32 MySQL Community Server - GPL
+Server version: 8.4.7 MySQL Community Server - GPL
 
 Copyright (c) 2000, 2023, Oracle and/or its affiliates.
 
@@ -154,7 +154,7 @@ $ mysql -h 127.0.0.1 -P 33306 -u admin -p
 Enter password:
 Welcome to the MySQL monitor.  Commands end with ; or \g.
 Your MySQL connection id is 17
-Server version: 8.0.32 MySQL Community Server - GPL
+Server version: 8.4.7 MySQL Community Server - GPL
 
 Copyright (c) 2000, 2024, Oracle and/or its affiliates.
 
@@ -179,20 +179,20 @@ Esto prueba el acceso al servicio MySQL en el contenedor desde el host, a travé
 Eliminar el contenedor si ya no lo vamos a utilizar. Para ello, detenemos primero el contenedor de MySQL:
 
 ```bash
-$ docker stop mysql-8.0-srv4
-mysql-8.0-srv4
+$ docker stop mysql-8.4.7-srv4
+mysql-8.4.7-srv4
 ```
 
-Este comando detiene el contenedor `mysql-8.0-srv4` sin eliminarlo. Esto es útil cuando quieres detener temporalmente el servicio sin eliminar el contenedor.
+Este comando detiene el contenedor `mysql-8.4.7-srv4` sin eliminarlo. Esto es útil cuando quieres detener temporalmente el servicio sin eliminar el contenedor.
 
 Eliminar el contenedor de MySQL si ya no lo necesitamos:
 
 ```bash
-$ docker rm mysql-8.0-srv4
-mysql-8.0-srv4
+$ docker rm mysql-8.4.7-srv4
+mysql-8.4.7-srv4
 ```
 
-Este comando elimina el contenedor `mysql-8.0-srv4` del sistema. El contenedor debe estar detenido antes de poder eliminarlo.
+Este comando elimina el contenedor `mysql-8.4.7-srv4` del sistema. El contenedor debe estar detenido antes de poder eliminarlo.
 
 Verificar los contenedores activos:
 
@@ -201,4 +201,4 @@ $ docker ps
 CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 ```
 
-Este comando muestra nuevamente la lista de contenedores activos. Después de eliminar el contenedor mysql-8.0-srv4, éste último no debería de estar en la lista.
+Este comando muestra nuevamente la lista de contenedores activos. Después de eliminar el contenedor mysql-8.4.7-srv4, éste último no debería de estar en la lista.

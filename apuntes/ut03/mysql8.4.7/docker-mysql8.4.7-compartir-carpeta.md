@@ -1,4 +1,4 @@
-# Desplegar un contenedor de MySQL 8.0 en Docker compartiendo una carpeta entre el Host y el Contenedor
+# Desplegar un contenedor de MySQL 8.4.7 en Docker compartiendo una carpeta entre el Host y el Contenedor
 
 Comprobar el directorio actual y crear la carpeta _scripts_:
 
@@ -21,7 +21,7 @@ drwxrwxr-x 2 alumno alumno  4096 oct 30 07:14 scripts
 Crear y ejecutar el contenedor MySQL con un volumen de enlace:
 
 ```bash
-$ docker run -d --name mysql-8.0-srv3 -v ./scripts:/scripts -e MYSQL_ROOT_PASSWORD=mysql8 mysql/mysql-server:8.0
+$ docker run -d --name mysql-8.4.7-srv3 -v ./scripts:/scripts -e MYSQL_ROOT_PASSWORD=mysql8 mysql:8.4.7
 18a841a174512de7b640cf313cd2da096430a7ca9c60f0b530c37bf122e657cf
 ```
 
@@ -32,8 +32,8 @@ Verificar el contenedor en ejecución:
 
 ```bash
 $ docker ps
-CONTAINER ID   IMAGE                    COMMAND                  CREATED         STATUS                   PORTS                  NAMES
-18a841a17451   mysql/mysql-server:8.0   "/entrypoint.sh mysq…"   2 minutes ago   Up 2 minutes (healthy)   [::]:33306->3306/tcp   mysql-8.0-srv3
+CONTAINER ID   IMAGE         COMMAND                  CREATED         STATUS                   PORTS                  NAMES
+18a841a17451   mysql:8.4.7   "/entrypoint.sh mysq…"   2 minutes ago   Up 2 minutes (healthy)   [::]:33306->3306/tcp   mysql-8.4.7-srv3
 ```
 
 El volumen de enlace permite que cualquier archivo creado en _/scripts_ dentro del contenedor esté disponible en la carpeta _scripts_ en el sistema host y viceversa, facilitando el acceso a scripts o archivos de configuración externos.
@@ -41,7 +41,7 @@ El volumen de enlace permite que cualquier archivo creado en _/scripts_ dentro d
 Inspeccionar el montaje del volumen en el contenedor:
 
 ```bash
-$ docker  inspect mysql-8.0-srv3 | grep mounts -i -A10
+$ docker  inspect mysql-8.4.7-srv3 | grep mounts -i -A10
         "Mounts": [
             {
                 "Type": "bind",
@@ -60,7 +60,7 @@ $ docker  inspect mysql-8.0-srv3 | grep mounts -i -A10
 Verificar la estructura de archivos en el contenedor:
 
 ```bash
-$ docker exec mysql-8.0-srv3 ls -l /
+$ docker exec mysql-8.4.7-srv3 ls -l /
 total 80
 lrwxrwxrwx   1 root root    7 Oct  9  2021 bin -> usr/bin
 dr-xr-xr-x   2 root root 4096 Oct  9  2021 boot
@@ -94,20 +94,20 @@ Este comando lista los archivos y directorios en el contenedor, y deberías ver 
 Eliminar el contenedor si ya no lo vamos a utilizar. Para ello, detenemos primero el contenedor de MySQL:
 
 ```bash
-$ docker stop mysql-8.0-srv3
-mysql-8.0-srv3
+$ docker stop mysql-8.4.7-srv3
+mysql-8.4.7-srv3
 ```
 
-Este comando detiene el contenedor `mysql-8.0-srv3` sin eliminarlo. Esto es útil cuando quieres detener temporalmente el servicio sin eliminar el contenedor.
+Este comando detiene el contenedor `mysql-8.4.7-srv3` sin eliminarlo. Esto es útil cuando quieres detener temporalmente el servicio sin eliminar el contenedor.
 
 Eliminar el contenedor de MySQL si ya no lo necesitamos:
 
 ```bash
-$ docker rm mysql-8.0-srv3
-mysql-8.0-srv3
+$ docker rm mysql-8.4.7-srv3
+mysql-8.4.7-srv3
 ```
 
-Este comando elimina el contenedor `mysql-8.0-srv3` del sistema. El contenedor debe estar detenido antes de poder eliminarlo.
+Este comando elimina el contenedor `mysql-8.4.7-srv3` del sistema. El contenedor debe estar detenido antes de poder eliminarlo.
 
 Verificar los contenedores activos:
 
@@ -116,4 +116,4 @@ $ docker ps
 CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 ```
 
-Este comando muestra nuevamente la lista de contenedores activos. Después de eliminar el contenedor mysql-8.0-srv3, éste último no debería de estar en la lista.
+Este comando muestra nuevamente la lista de contenedores activos. Después de eliminar el contenedor mysql-8.4.7-srv3, éste último no debería de estar en la lista.

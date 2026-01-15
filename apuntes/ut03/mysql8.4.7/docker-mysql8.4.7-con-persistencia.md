@@ -34,7 +34,7 @@ $ docker volume inspect mysql-8.4.7-srv2-data
 * __Mountpoint__: ruta en el sistema de archivos donde se almacena el volumen.
 * __Driver__: tipo de controlador de almacenamiento, en este caso local
 
-Crear y ejecutar un contenedor MySQL usando el volumen:
+Crear y ejecutar un contenedor MySQL usando el volumen:f
 
 ```bash
 $ docker run -d --name mysql-8.4.7-srv2 -v mysql-8.4.7-srv2-data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=mysql8  mysql:8.4.7

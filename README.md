@@ -22,3 +22,6 @@
         * Elección de imágenes en Docker Hub ([Apuntes](./apuntes/ut03/mysql8.4.7/docker-mysql8.4.7-eleccion-imagenes.md))
         * Desplegar un contenedor sin persistencia ([Apuntes](./apuntes/ut03/mysql8.4.7/docker-mysql8.4.7-sin-persistencia.md))
         * Desplegar un contenedor con persistencia ([Apuntes](./apuntes/ut03/mysql8.4.7/docker-mysql8.4.7-con-persistencia.md))
+        * Desplegar un contenedor compartiendo una carpeta entre el host y el contenedor ([Apuntes](./apuntes/ut03/mysql8.4.7/docker-mysql8.4.7-compartir-carpeta.md))
+        * Desplegar un contenedor con acceso externo al servicio del contenedor ([Apuntes](./apuntes/ut03/mysql8.4.7/docker-mysql8.4.7-acceso-externo.md))
+        * Cargar un fichero SQL al desplegar un contenedor cuando arranca por primera vez ([Apuntes](./apuntes/ut03/mysql8.4.7/docker-mysql8.4.7-carga-fichero-sql.md))
