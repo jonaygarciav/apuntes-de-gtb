@@ -25,3 +25,7 @@
         * Desplegar un contenedor compartiendo una carpeta entre el host y el contenedor ([Apuntes](./apuntes/ut03/mysql8.4.7/docker-mysql8.4.7-compartir-carpeta.md))
         * Desplegar un contenedor con acceso externo al servicio del contenedor ([Apuntes](./apuntes/ut03/mysql8.4.7/docker-mysql8.4.7-acceso-externo.md))
         * Cargar un fichero SQL al desplegar un contenedor cuando arranca por primera vez ([Apuntes](./apuntes/ut03/mysql8.4.7/docker-mysql8.4.7-carga-fichero-sql.md))
+
+## UT04: Fundamentos de Bases de Datos
+
+* Comandos SQL ([Apuntes](./apuntes/ut04/comandos-sql.md))
