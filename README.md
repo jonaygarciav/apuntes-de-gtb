@@ -29,3 +29,4 @@
 ## UT04: Fundamentos de Bases de Datos
 
 * Comandos SQL ([Apuntes](./apuntes/ut04/comandos-sql.md))
+* Character Set y Collations ([Apuntes](./apuntes/ut04/character-set-y-collations.md))
