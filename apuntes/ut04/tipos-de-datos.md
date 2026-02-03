@@ -146,7 +146,7 @@ Crear una tabla con diferentes tipos de datos
 CREATE TABLE empleados (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(50),
-    salario DECIMAL(10, 2),
+    salario DECIMAL(6, 2),
     fecha_contratacion DATE,
     horario TIME
 );
