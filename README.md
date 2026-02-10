@@ -33,3 +33,7 @@
 * Tipos de Datos ([Apuntes](./apuntes/ut04/tipos-de-datos.md))
 * Motores de almacenamiento ([Apuntes](./apuntes/ut04/engines.md))
 
+## UT05: Data Manipulation Language (DML)
+
+* Consultas SQL de una tabla ([Apuntes](./apuntes/ut05/consultas-sql-una-tabla.md))
+* Consultas SQL de varias tablas (composición interna) ([Apuntes](./apuntes/ut05/consultas-sql-varias-tablas-composicion-interna.md))
