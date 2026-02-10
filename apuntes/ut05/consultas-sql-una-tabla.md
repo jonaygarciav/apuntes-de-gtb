@@ -95,11 +95,11 @@ SELECT [DISTINCT] select_expr [, select_expr ...]
 
 __Nota__: es muy importante conocer en qué orden se ejecuta cada una de las cláusulas que forman la sentencia `SELECT`. El orden de ejecución es el siguiente:
 
-1. Cláusula `FROM`.
-2. Cláusula `WHERE` (Es opcional, puede ser que no aparezca).
-3. Cláusula `GROUP BY` (Es opcional, puede ser que no aparezca).
-4. Cláusula `HAVING` (Es opcional, puede ser que no aparezca).
-5. Cláusula `SELECT`.
+1. Cláusula `SELECT`.
+2. Cláusula `FROM`.
+3. Cláusula `WHERE` (Es opcional, puede ser que no aparezca).
+4. Cláusula `GROUP BY` (Es opcional, puede ser que no aparezca).
+5. Cláusula `HAVING` (Es opcional, puede ser que no aparezca).
 6. Cláusula `ORDER BY` (Es opcional, puede ser que no aparezca).
 7. Cláusula `LIMIT` (Es opcional, puede ser que no aparezca).
 
