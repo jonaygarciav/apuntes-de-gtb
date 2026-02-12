@@ -33,7 +33,7 @@ Las funciones pueden trabajar sobre:
 * Datos agregados (sumatorio, media, ...)
 * Conversión de tipos de datos
 
-En la (documentación oficial)[https://dev.mysql.com/doc/refman/8.4/en/functions.html] puedes encontrar la referencia completa de todas las funciones y operadores disponibles en MySQL
+En la [documentación oficial](https://dev.mysql.com/doc/refman/8.4/en/functions.html) puedes encontrar la referencia completa de todas las funciones y operadores disponibles en MySQL
 
 ## Cómo utilizar funciones de MySQL en la cláusula SELECT
 
