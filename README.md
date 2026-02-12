@@ -36,5 +36,5 @@
 ## UT05: Data Manipulation Language (DML)
 
 Consultas SQL de una tabla:
-* Operaciones aritméticas y alias ([Apuntes](./apuntes/ut05/consultas-sql-una-tabla/operaciones-aritmeticas-y-alias.md))
+* Comentarios, operaciones aritméticas y alias ([Apuntes](./apuntes/ut05/consultas-sql-una-tabla/comentarios-operaciones-aritmeticas-y-alias.md))
 * Funciones ([Apuntes](./apuntes/ut05/consultas-sql-una-tabla/funciones.md))
