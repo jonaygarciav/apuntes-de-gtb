@@ -1,4 +1,4 @@
-# Cláusula Where
+# Cláusula WHERE
 
 * [Introducción](#introducción)
 * [Operadores disponibles en MySQL](#operadores-disponibles-en-mysql)

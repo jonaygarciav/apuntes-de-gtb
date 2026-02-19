@@ -38,4 +38,4 @@
 Consultas SQL de una tabla:
 * Comentarios, operaciones aritméticas y alias ([Apuntes](./apuntes/ut05/consultas-sql-una-tabla/comentarios-operaciones-aritmeticas-y-alias.md))
 * Funciones ([Apuntes](./apuntes/ut05/consultas-sql-una-tabla/funciones.md))
-* Cláusula Where ([Apuntes](./apuntes/ut05/consultas-sql-una-tabla/where.md))
+* Cláusula WHERE ([Apuntes](./apuntes/ut05/consultas-sql-una-tabla/where.md))
