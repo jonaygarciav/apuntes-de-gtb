@@ -39,3 +39,4 @@ Consultas SQL de una tabla:
 * Comentarios, operaciones aritméticas y alias ([Apuntes](./apuntes/ut05/consultas-sql-una-tabla/comentarios-operaciones-aritmeticas-y-alias.md))
 * Funciones ([Apuntes](./apuntes/ut05/consultas-sql-una-tabla/funciones.md))
 * Cláusula WHERE ([Apuntes](./apuntes/ut05/consultas-sql-una-tabla/where.md))
+* Tipos numerados y restricciones ([Apuntes](./apuntes/ut05/consultas-sql-una-tabla/tipos-numerados-y-restricciones.md))
