@@ -40,3 +40,4 @@ Consultas SQL de una tabla:
 * Funciones ([Apuntes](./apuntes/ut05/consultas-sql-una-tabla/funciones.md))
 * Cláusula WHERE ([Apuntes](./apuntes/ut05/consultas-sql-una-tabla/where.md))
 * Tipos numerados y restricciones ([Apuntes](./apuntes/ut05/consultas-sql-una-tabla/tipos-numerados-y-restricciones.md))
+* Cláusulas ORDER BY, LIMIT, OFFSET y palabra clave DISTINCT ([Apuntes](./apuntes/ut05/consultas-sql-una-tabla/order-by-limit-offset-y-distinct.md))
