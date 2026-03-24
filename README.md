@@ -41,4 +41,5 @@ Consultas SQL de una tabla:
 * Cláusula WHERE ([Apuntes](./apuntes/ut05/consultas-sql-una-tabla/where.md))
 * Tipos numerados y restricciones ([Apuntes](./apuntes/ut05/consultas-sql-una-tabla/tipos-numerados-y-restricciones.md))
 * Cláusulas ORDER BY, LIMIT, OFFSET y palabra clave DISTINCT ([Apuntes](./apuntes/ut05/consultas-sql-una-tabla/order-by-limit-offset-y-distinct.md))
+* Función COUNT(), cláusulas GROUP BY y HAVING ([Apuntes](./apuntes/ut05/consultas-sql-una-tabla/count-group-by-y-having.md))
 * Hora y Fecha ([Apuntes](./apuntes/ut05/consultas-sql-una-tabla/hora-y-fecha.md))
