@@ -46,4 +46,4 @@ Consultas SQL de una tabla:
 
 ## UT06: UPDATE - Data Manipulation Language (DML)
 
-* UPDATE ([Apuntes](./apuntes/ut06/update.md))
+* Comando UPDATE ([Apuntes](./apuntes/ut06/update.md))
