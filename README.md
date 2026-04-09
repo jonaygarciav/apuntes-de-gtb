@@ -33,7 +33,7 @@
 * Tipos de Datos ([Apuntes](./apuntes/ut04/tipos-de-datos.md))
 * Motores de almacenamiento ([Apuntes](./apuntes/ut04/engines.md))
 
-## UT05: SELECT - Data Manipulation Language (DML)
+## UT05: Data Manipulation Language (DML): SELECT
 
 Consultas SQL de una tabla:
 * Comentarios, operaciones aritméticas y alias ([Apuntes](./apuntes/ut05/consultas-sql-una-tabla/comentarios-operaciones-aritmeticas-y-alias.md))
@@ -44,6 +44,7 @@ Consultas SQL de una tabla:
 * Función COUNT(), cláusulas GROUP BY y HAVING ([Apuntes](./apuntes/ut05/consultas-sql-una-tabla/count-group-by-y-having.md))
 * Hora y Fecha ([Apuntes](./apuntes/ut05/consultas-sql-una-tabla/hora-y-fecha.md))
 
-## UT06: UPDATE - Data Manipulation Language (DML)
+## UT06: Data Manipulation Language (DML): Comandos UPDATE y DELETE
 
 * Comando UPDATE ([Apuntes](./apuntes/ut06/update.md))
+* Comando DELETE ([Apuntes](./apuntes/ut06/delete.md))
