@@ -48,3 +48,4 @@ Consultas SQL de una tabla:
 
 * Comando UPDATE ([Apuntes](./apuntes/ut06/update.md))
 * Comando DELETE ([Apuntes](./apuntes/ut06/delete.md))
+* Comando INSERT ([Apuntes](./apuntes/ut06/insert.md))
