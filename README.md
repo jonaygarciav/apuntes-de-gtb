@@ -53,3 +53,4 @@ Consultas SQL de una tabla:
 ## UT07: Data Definition Language (DDL): Comando CREATE TABLE
 
 * Comando CREATE TABLE ([Apuntes](./apuntes/ut07/create-table.md))
+* Comando ALTER TABLE ([Apuntes](./apuntes/ut07/alter-table.md))
