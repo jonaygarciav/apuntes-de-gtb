@@ -257,4 +257,3 @@ Cuándo usar alias:
 * Cuando hay columnas con el mismo nombre
 * Para mejorar la legibilidad
 * En resultados que se mostrarán al usuario
-* En exámenes (muy recomendable)
