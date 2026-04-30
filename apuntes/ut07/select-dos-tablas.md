@@ -180,12 +180,11 @@ AND a.nombre = 'Ana';
 
 Se pueden usar operadores:
 
-* =
-* >
-* <
-* >=
-* <=
-
+* `=`
+* `>`
+* `<`
+* `>=`
+* `<=`
 
 ```
 SELECT a.nombre, p.nombre
@@ -209,10 +208,16 @@ Esto provoca que en el resultado aparezcan columnas duplicadas con el mismo nomb
 
 Para solucionar esto, usamos alias en las columnas con la palabra clave AS.
 
+Sintaxis:
+
 ```
 SELECT columna AS alias
 FROM tabla;
-📌 Ejemplo con dos tablas
+```
+
+Ejemplo con dos tablas:
+
+```
 SELECT a.nombre AS alumno, p.nombre AS profesor
 FROM alumnos a, profesores p
 WHERE a.profesor_id = p.id;
