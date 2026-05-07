@@ -6,6 +6,11 @@
   * [Elementos de MongoDB](#elementos-de-mongodb)
   * [Creación de BBDD](#creación-de-bbdd)
   * [Creación de colecciones y documentos](#creación-de-colecciones-y-documentos)
+  * [Métodos insertOne e inertMany](#métodos-insertone-e-inertmany)
+  * [Campo obligatorio \_id](#campo-obligatorio-_id)
+  * [Comandos del shell de MongoDB: use, show dbs, show collections y help](#comandos-del-shell-de-mongodb-use-show-dbs-show-collections-y-help)
+  * [Borrar bases de datos, colecciones o todos los documentos de una colección](#borrar-bases-de-datos-colecciones-o-todos-los-documentos-de-una-colección)
+  * [Filtrar documentos de una colección con el método find](#filtrar-documentos-de-una-colección-con-el-método-find)
 
 
 ## Introducción
@@ -327,6 +332,482 @@ Todos los documentos requiere una clave principal almacenada en el campo `_id`. 
 ```
 biblioteca> db
 biblioteca
+```
+
+### Métodos insertOne e inertMany
+
+Para insertar un documento o un conjunto de documentos disponemos de los métodos:
+
+* `insertOne`: inserta un documento en una colección.
+* `insertMany`: inserta múltiples documentos en una colección.
+
+En el apartado anterior vimos como utilizar el método `insertOne` para insertar un documento en la colección `libros`. Para insertar más de un documento en la colección `libros` mediante el método `insertMany` sería de la siguiente manera:
+
+```
+db.libros.insertMany(
+  [
+    {
+      codigo: 3,  
+      nombre: 'Aprenda PHP',
+      autor: 'Mario Molina',
+      editoriales: ['Planeta']
+    },
+    {
+      codigo: 4,  
+      nombre: 'Java en 10 minutos',
+      autor: 'Barros Sergio',
+      editoriales: ['Planeta','Siglo XXI']
+    }
+  ]
+)
+```
+
+Obtendríamos la siguiente salida en la Shell de MongoDB:
+
+```
+biblioteca> db.libros.insertMany(
+|   [
+|     {
+|       codigo: 3,
+|       nombre: 'Aprenda PHP',
+|       autor: 'Mario Molina',
+|       editoriales: ['Planeta']
+|     },
+|     {
+|       codigo: 4,
+|       nombre: 'Java en 10 minutos',
+|       autor: 'Barros Sergio',
+|       editoriales: ['Planeta','Siglo XXI']
+|     }
+|   ]
+| )
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('69fc9c89d33228a73b9df8a3'),
+    '1': ObjectId('69fc9c89d33228a73b9df8a4')
+  }
+}
+```
+
+Ahora si quieremos ver todos los documentos de la colección `libros` usamos el método `find()`:
+
+```
+biblioteca> db.libros.find()
+[
+  {
+    _id: ObjectId('69f9c361d20ac2b4799df8a3'),
+    codigo: 1,
+    nombre: 'El aleph',
+    autor: 'Borges',
+    editoriales: [ 'Planeta', 'Siglo XXI' ]
+  },
+  {
+    _id: ObjectId('69f9c458d20ac2b4799df8a4'),
+    codigo: 2,
+    nombre: 'Martin Fierro',
+    autor: 'Jose Hernandez',
+    editoriales: [ 'Planeta' ]
+  },
+  {
+    _id: ObjectId('69fc9c89d33228a73b9df8a3'),
+    codigo: 3,
+    nombre: 'Aprenda PHP',
+    autor: 'Mario Molina',
+    editoriales: [ 'Planeta' ]
+  },
+  {
+    _id: ObjectId('69fc9c89d33228a73b9df8a4'),
+    codigo: 4,
+    nombre: 'Java en 10 minutos',
+    autor: 'Barros Sergio',
+    editoriales: [ 'Planeta', 'Siglo XXI' ]
+  }
+]
+```
+
+Para borrar el contenido de la Shell de MongoDB se hace con el comando `cls`:
+
+```
+biblioteca> cls
+```
+
+### Campo obligatorio _id
+
+En MongoDB todo documento requiere un campo clave que se debe llamar `_id`. Si no definimos dicho campo el mismo se crea en forma automática y se carga un valor único.
+
+Podemos definir y cargar un valor en el campo `_id` cuando inicializamos un documento, en este caso, en una nueva colección llamada `clientes`:
+
+```
+db.clientes.insertOne(
+  {
+    _id: 1,  
+    nombre: 'Lopez Marcos',
+    domicilio: 'Colon 111',
+    provincia: 'Cordoba'
+  }
+)
+```
+
+```
+biblioteca> db.clientes.insertOne(
+|   {
+|     _id: 1,
+|     nombre: 'Lopez Marcos',
+|     domicilio: 'Colon 111',
+|     provincia: 'Cordoba'
+|   }
+| )
+{ acknowledged: true, insertedId: 1 }
+```
+
+Ahora consultamos todos los documentos de la colección `clientes` mediante el método `find()`:
+
+```
+biblioteca> db.clientes.find()
+[
+  {
+    _id: 1,
+    nombre: 'Lopez Marcos',
+    domicilio: 'Colon 111',
+    provincia: 'Cordoba'
+  }
+]
+```
+Vemos que hay un solo documento que tiene el campo `_id` con un valor igual a 1.
+
+Si intentamos insertar un nuevo documento con el mismo `_id`:
+
+```
+db.clientes.insertOne(
+  {
+    _id: 1,
+    nombre: 'Ana María',
+    domicilio: 'Oliveira 3',
+    provincia: 'Huelva'
+  }
+)
+```
+
+Obtenemos el siguiente error:
+
+```
+biblioteca> db.clientes.insertOne(
+|   {
+|     _id: 1,
+|     nombre: 'Ana María',
+|     domicilio: 'Oliveira 3',
+|     provincia: 'Huelva'
+|   }
+| )
+MongoServerError: E11000 duplicate key error collection: biblioteca.clientes index: _id_ dup key: { _id: 1 }
+```
+
+> __Nota__: no pueden hacer dos documentos con el mismo `_id`.
+
+### Comandos del shell de MongoDB: use, show dbs, show collections y help
+
+Ya vimos en apartados anteriores que, mediante el comando `use`, activamos la base de datos con la que queremos trabajar:
+
+```
+test> use biblioteca
+switched to db biblioteca
+biblioteca>
+```
+
+Para conocer todas las bases de datos del servidor de MongoDB utilizamos el comando `show dbs`:
+
+```
+biblioteca> show dbs
+admin        40.00 KiB
+biblioteca  120.00 KiB
+config       88.00 KiB
+local        80.00 KiB
+```
+
+Para ver las colecciones que contiene cada base de datos utilizamos el comando `show collections`:
+
+```
+biblioteca> show collections
+clientes
+libros
+```
+
+En la base de datos `biblioteca` contiene dos colecciones llamadas `clientes` y `libros` que nosotros creamos en conceptos anteriores.
+
+Si queremos consultar más comandos para la Shell de MongoDB ejecutamos el comando `help`:
+
+```
+biblioteca> help
+
+  Shell Help:
+
+    log                                        'log.info(<msg>)': Write a custom info/warn/error/fatal/debug message to the log file
+                                               'log.getPath()': Gets a path to the current log file
+
+    use                                        Set current database
+    show                                       'show databases'/'show dbs': Print a list of all available databases
+                                               'show collections'/'show tables': Print a list of all collections for current database
+                                               'show profile': Prints system.profile information
+                                               'show users': Print a list of all users for current database
+                                               'show roles': Print a list of all roles for current database
+                                               'show log <name>': Display log for current connection, if name is not set uses 'global'
+                                               'show logs': Print all logger names.
+    exit                                       Quit the MongoDB shell with exit/exit()/.exit
+    quit                                       Quit the MongoDB shell with quit/quit()
+    Mongo                                      Create a new connection and return the Mongo object. Usage: new Mongo(URI, options [optional])
+    connect                                    Create a new connection and return the Database object. Usage: connect(URI, username [optional], password [optional])
+    it                                         result of the last line evaluated; use to further iterate
+    version                                    Shell version
+    load                                       Loads and runs a JavaScript file into the current shell environment
+    enableTelemetry                            Enables collection of anonymous usage data to improve the mongosh CLI
+    disableTelemetry                           Disables collection of anonymous usage data to improve the mongosh CLI
+    passwordPrompt                             Prompts the user for a password
+    sleep                                      Sleep for the specified number of milliseconds
+    print                                      Prints the contents of an object to the output
+    printjson                                  Alias for print()
+    convertShardKeyToHashed                    Returns the hashed value for the input using the same hashing function as a hashed index.
+    cls                                        Clears the screen like console.clear()
+    isInteractive                              Returns whether the shell will enter or has entered interactive mode
+
+  For more information on usage: https://mongodb.com/docs/manual/reference/method
+```
+
+### Borrar bases de datos, colecciones o todos los documentos de una colección
+
+Hemos visto como se crea una base de datos, una colección y se insertan documentos en la misma.
+
+Si queremos eliminar todos los documentos de una colección debemos utilizar el método `deleteMany()` aplicado a una colección existente, en este caso a la colección `libros` de la Base de Datos `biblioteca`:
+
+```
+use biblioteca
+show collections
+db.libros.deleteMany({})
+show collections
+```
+
+Obtenemos la siguiente salida:
+
+```
+test> use biblioteca
+switched to db biblioteca
+
+biblioteca> show collections
+clientes
+libros
+
+biblioteca> db.libros.deleteMany({})
+{ acknowledged: true, deletedCount: 4 }
+
+biblioteca> db.libros.find()
+
+biblioteca>
+```
+
+Para eliminar todos los documentos se indica con las llaves abiertas y cerradas {}. Luego veremos que podemos borrar solamente los documentos que cumplen una determinada condición.
+
+Es importante notar que luego de llamar al método deleteMany la colección "libros" sigue existiendo, pero vacía:
+
+```
+biblioteca> show collections
+clientes
+libros
+```
+
+Para eliminar los documentos de una colección y la colección propiamente dicha debemos emplear el método `drop()`:
+
+```
+use biblioteca
+db.libros.drop()
+show collections
+```
+
+Obtenemos la siguiente salida:
+
+```
+test> use biblioteca
+biblioteca> db.libros.drop()
+true
+biblioteca> show collections
+clientes
+```
+
+Después de llamar al método `drop()` en la colección `libros`, ésta última dejará de existir.
+
+Para eliminar una base de datos en forma completa, es decir todas sus colecciones y documentos debemos emplear el método `dropDatabase` del objeto "db":
+
+```
+show dbs
+use biblioteca
+db.dropDatabase()
+show dbs
+```
+
+Obtenemos la siguiente salida:
+
+```
+test> show dbs
+admin        40.00 KiB
+biblioteca   56.00 KiB
+config      108.00 KiB
+local        80.00 KiB
+
+test> use biblioteca
+switched to db biblioteca
+
+biblioteca> db.dropDatabase()
+{ ok: 1, dropped: 'biblioteca' }
+
+biblioteca> use biblioteca
+already on db biblioteca
+```
+
+El método `dropDatabase()` elimina la base de datos activa.
+
+### Filtrar documentos de una colección con el método find
+
+Vamos a crear de nuevo la colección `libros` desde cero insertando 4 documentos:
+
+```
+use biblioteca
+db.libros.drop()
+
+db.libros.insertOne(
+  {
+    _id: 1,  
+    titulo: 'El aleph',
+    autor: 'Borges',
+    editorial: ['Siglo XXI','Planeta'],
+    precio: 20,
+    cantidad: 50 
+  }
+)
+db.libros.insertOne(
+  {
+    _id: 2,  
+    titulo: 'Martin Fierro',
+    autor: 'Jose Hernandez',
+    editorial: ['Siglo XXI'],
+    precio: 50,
+    cantidad: 12
+  }
+)
+db.libros.insertOne(
+  {
+    _id: 3,  
+    titulo: 'Aprenda PHP',
+    autor: 'Mario Molina',
+    editorial: ['Siglo XXI','Planeta'],
+    precio: 50,
+    cantidad: 20
+  }
+)
+db.libros.insertOne(
+  {
+    _id: 4,  
+    titulo: 'Java en 10 minutos',
+    editorial: ['Siglo XXI'],
+    precio: 45,
+    cantidad: 1 
+  }
+)
+```
+
+Con el método `find()` obtenemos todos los documentos de la colección `libros`:
+
+```
+biblioteca> db.libros.find()
+[
+  {
+    _id: 1,
+    titulo: 'El aleph',
+    autor: 'Borges',
+    editorial: [ 'Siglo XXI', 'Planeta' ],
+    precio: 20,
+    cantidad: 50
+  },
+  {
+    _id: 2,
+    titulo: 'Martin Fierro',
+    autor: 'Jose Hernandez',
+    editorial: [ 'Siglo XXI' ],
+    precio: 50,
+    cantidad: 12
+  },
+  {
+    _id: 3,
+    titulo: 'Aprenda PHP',
+    autor: 'Mario Molina',
+    editorial: [ 'Siglo XXI', 'Planeta' ],
+    precio: 50,
+    cantidad: 20
+  },
+  {
+    _id: 4,
+    titulo: 'Java en 10 minutos',
+    editorial: [ 'Siglo XXI' ],
+    precio: 45,
+    cantidad: 1
+  }
+]
+```
+
+El método `find()` nos permite añadir condiciones para filtrar los resultados, en este caso filtramos el documento cuyo `_id` es igual a 1:
+
+```
+biblioteca> db.libros.find({_id : 1})
+[
+  {
+    _id: 1,
+    titulo: 'El aleph',
+    autor: 'Borges',
+    editorial: [ 'Siglo XXI', 'Planeta' ],
+    precio: 20,
+    cantidad: 50
+  }
+]
+```
+
+> __Nota__: si pasamos un valor para el campo `_id` que no existe luego el método find no regresa un documento.
+
+Para filtrar los libros cuyo precio sea igual a 50:
+
+```
+biblioteca> db.libros.find({precio : 50 })
+[
+  {
+    _id: 2,
+    titulo: 'Martin Fierro',
+    autor: 'Jose Hernandez',
+    editorial: [ 'Siglo XXI' ],
+    precio: 50,
+    cantidad: 12
+  },
+  {
+    _id: 3,
+    titulo: 'Aprenda PHP',
+    autor: 'Mario Molina',
+    editorial: [ 'Siglo XXI', 'Planeta' ],
+    precio: 50,
+    cantidad: 20
+  }
+]
+```
+
+Podemos filtrar documentos que cumplan más de 1 condición, en este caso filtramos los libros cuyo precio es igual a 50 y se disponen de 20 unidades:
+
+```
+biblioteca> db.libros.find({precio : 50, cantidad : 20 })
+[
+  {
+    _id: 3,
+    titulo: 'Aprenda PHP',
+    autor: 'Mario Molina',
+    editorial: [ 'Siglo XXI', 'Planeta' ],
+    precio: 50,
+    cantidad: 20
+  }
+]
 ```
 
 [01]: ../img/ut08/01.png "01"
