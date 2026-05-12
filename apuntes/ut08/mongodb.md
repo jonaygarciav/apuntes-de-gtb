@@ -15,6 +15,7 @@
   * [Borrar documentos de una colección con los métodos deleteOne() y deleteMany()](#borrar-documentos-de-una-colección-con-los-métodos-deleteone-y-deletemany)
   * [Modificar un documento mediante el método updateOne()](#modificar-un-documento-mediante-el-método-updateone)
   * [Modificar múltiples documentos con el método updateMany()](#modificar-múltiples-documentos-con-el-método-updatemany)
+  * [Operadores lógicos $and, $or y $not](#operadores-lógicos-and-or-y-not)
 
 
 ## Introducción
@@ -1254,6 +1255,99 @@ db.libros.updateMany({cantidad : {$eq:0}} , {$unset : {faltantes:true}, $set:{ca
 
 db.libros.find()
 ```
+
+### Operadores lógicos $and, $or y $not
+
+Cuando necesitamos construir consultas que deban cumplir varias condiciones utilizaremos los operadores lógicos.
+
+El operador `$and` lo hemos utilizando en forma implícita, por ejemplo si tenemos:
+
+```
+db.libros.find({precio : 50, cantidad : 20 }) 
+```
+
+Con la condición anterior se recuperan todos los libros que tienen un precio de 50 y la cantidad es 20. Las dos condiciones deben ser verdaderas para que el documento se recupere.
+
+La sintaxis alternativa para el `find()` es:
+
+```
+db.libros.find({$and : [{precio:50}, {cantidad:20}]  })
+```
+
+El valor para el operador $and es un arreglo con cada una de las condiciones que debe cumplir.
+
+Para los operadores `$or` y `$not` no hay una forma de disponer una sintaxis implícita.
+
+Veamos con ejemplos el empleo de los operadores `$or` y `$not`:
+
+```
+use biblioteca
+db.libros.drop()
+
+db.libros.insertOne(
+  {
+    _id: 1,  
+    titulo: 'El aleph',
+    autor: 'Borges',
+    editorial: ['Siglo XXI','Planeta'],
+    precio: 20,
+    cantidad: 50 
+  }
+)
+db.libros.insertOne(
+  {
+    _id: 2,  
+    titulo: 'Martin Fierro',
+    autor: 'Jose Hernandez',
+    editorial: ['Siglo XXI'],
+    precio: 50,
+    cantidad: 12
+  }
+)
+db.libros.insertOne(
+  {
+    _id: 3,  
+    titulo: 'Aprenda PHP',
+    autor: 'Mario Molina',
+    editorial: ['Siglo XXI','Planeta'],
+    precio: 50,
+    cantidad: 20
+  }
+)
+db.libros.insertOne(
+  {
+    _id: 4,  
+    titulo: 'Java en 10 minutos',
+    editorial: ['Siglo XXI'],
+    precio: 45,
+    cantidad: 1 
+  }
+)
+
+db.libros.find()
+```
+
+Para recuperar los libros que tienen un precio mayor o igual a 50 o la cantidad es 1 debemos implementar mediante un $or la siguiente sintaxis:
+
+```
+db.libros.find({$or: [{precio:{$gte:50}}, {cantidad:1} ]})
+```
+
+Si queremos recuperar todos los documentos de la colección libros que no tienen un precio mayor o igual a 50 la sintaxis debe ser:
+
+```
+db.libros.find({precio: {$not:{$gte:50}} })
+```
+
+Los operadores lógicos podemos utilizarlos no solo para recuperar datos, sino también cuando borramos o actualizamos documentos.
+
+Si queremos borrar todos los libros cuyo precio no sean iguales a 50 podemos codificar:
+
+```
+db.libros.deleteMany({precio: {$not:{$eq:50}} })
+```
+
+Se eliminan dos documentos de la colección libros.
 
 [01]: ../img/ut08/01.png "01"
 [02]: ../img/ut08/02.jpg "02"
