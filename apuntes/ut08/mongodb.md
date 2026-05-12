@@ -1028,6 +1028,8 @@ Para borrar todos los libros que tienen un precio mayor o igual a 50 tenemos:
 db.libros.deleteMany({precio : {$gte : 50 }})
 ```
 
+> __Nota__: la ejecución del método `deleteOne()` y `deleteMany()` informa de la cantidad de documentos eliminados.
+
 ### Modificar un documento mediante el método updateOne()
 
 Hemos visto en conceptos anteriores como insertar un documento en una colección, recuperar un documento, borrar un documento y nos está faltando otra operación fundamental que podemos hacer con un documento que es su modificación.
@@ -1252,8 +1254,6 @@ db.libros.updateMany({cantidad : {$eq:0}} , {$unset : {faltantes:true}, $set:{ca
 
 db.libros.find()
 ```
-
-> __Nota__: la ejecución del método `deleteOne()` y `deleteMany()` informa de la cantidad de documentos eliminados.
 
 [01]: ../img/ut08/01.png "01"
 [02]: ../img/ut08/02.jpg "02"
