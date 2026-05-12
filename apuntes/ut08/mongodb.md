@@ -6,11 +6,15 @@
   * [Elementos de MongoDB](#elementos-de-mongodb)
   * [Creación de BBDD](#creación-de-bbdd)
   * [Creación de colecciones y documentos](#creación-de-colecciones-y-documentos)
-  * [Métodos insertOne e inertMany](#métodos-insertone-e-inertmany)
+  * [Métodos insertOne() e insertMany()](#métodos-insertone-e-insertmany)
   * [Campo obligatorio \_id](#campo-obligatorio-_id)
   * [Comandos del shell de MongoDB: use, show dbs, show collections y help](#comandos-del-shell-de-mongodb-use-show-dbs-show-collections-y-help)
   * [Borrar bases de datos, colecciones o todos los documentos de una colección](#borrar-bases-de-datos-colecciones-o-todos-los-documentos-de-una-colección)
-  * [Filtrar documentos de una colección con el método find](#filtrar-documentos-de-una-colección-con-el-método-find)
+  * [Filtrar documentos de una colección con el método find()](#filtrar-documentos-de-una-colección-con-el-método-find)
+  * [Operadores relacionales $eq, $gt, $gte, $lt, $nin y $ne](#operadores-relacionales-eq-gt-gte-lt-nin-y-ne)
+  * [Borrar documentos de una colección con los métodos deleteOne() y deleteMany()](#borrar-documentos-de-una-colección-con-los-métodos-deleteone-y-deletemany)
+  * [Modificar un documento mediante el método updateOne()](#modificar-un-documento-mediante-el-método-updateone)
+  * [Modificar múltiples documentos con el método updateMany()](#modificar-múltiples-documentos-con-el-método-updatemany)
 
 
 ## Introducción
@@ -334,7 +338,7 @@ biblioteca> db
 biblioteca
 ```
 
-### Métodos insertOne e inertMany
+### Métodos insertOne() e insertMany()
 
 Para insertar un documento o un conjunto de documentos disponemos de los métodos:
 
@@ -664,7 +668,7 @@ already on db biblioteca
 
 El método `dropDatabase()` elimina la base de datos activa.
 
-### Filtrar documentos de una colección con el método find
+### Filtrar documentos de una colección con el método find()
 
 Vamos a crear de nuevo la colección `libros` desde cero insertando 4 documentos:
 
@@ -809,6 +813,447 @@ biblioteca> db.libros.find({precio : 50, cantidad : 20 })
   }
 ]
 ```
+
+### Operadores relacionales $eq, $gt, $gte, $lt, $nin y $ne
+
+En este apartado veremos cómo utilizar los operadores `$eq`, `$gt`, `$gte`, `$lt`, `$nin` y `$ne` para realizar consultas:
+
+Partimos de los siguientes datos:
+
+```
+use biblioteca
+db.libros.drop()
+
+db.libros.insertOne(
+  {
+    _id: 1,  
+    titulo: 'El aleph',
+    autor: 'Borges',
+    editorial: ['Siglo XXI','Planeta'],
+    precio: 20,
+    cantidad: 50 
+  }
+)
+db.libros.insertOne(
+  {
+    _id: 2,  
+    titulo: 'Martin Fierro',
+    autor: 'Jose Hernandez',
+    editorial: ['Siglo XXI'],
+    precio: 50,
+    cantidad: 12
+  }
+)
+db.libros.insertOne(
+  {
+    _id: 3,  
+    titulo: 'Aprenda PHP',
+    autor: 'Mario Molina',
+    editorial: ['Siglo XXI','Planeta'],
+    precio: 50,
+    cantidad: 20
+  }
+)
+db.libros.insertOne(
+  {
+    _id: 4,  
+    titulo: 'Java en 10 minutos',
+    editorial: ['Siglo XXI'],
+    precio: 45,
+    cantidad: 1 
+  }
+)
+
+db.libros.find()
+```
+
+Por ejemplo, si queremos buscar aquellos libros libros cuyo precio es igual a 50:
+
+```
+db.libros.find({ precio: 50 })
+```
+
+Es decir que cuando llamamos al método `find()` pasamos un objeto literal pasando en el campo precio el valor 50, luego el método `find()` filtra todos los libros cuyo precio sean exactamente igual a 50.
+
+Otra forma de expresar la búsqueda de todos los libros con un precio igual a 50 es:
+
+```
+db.libros.find({ precio: { $eq : 50 } })
+```
+
+Es decir que luego del campo precio pasamos otro objeto literal iniciando el operador `$eq` con el valor 50.
+
+Mostramos esta segunda forma de consultar todos los libros con un precio igual a 50 debido a que cuando tenemos que consultar por ejemplo los libros con un precio inferior a 50, o superior a 50 etc. debemos indicar en forma obligatoria el operador a utilizar.
+
+Para mostrar todos los libros con un precio inferior a 30 tenemos que utilizar el operador `$lt`:
+
+```
+db.libros.find({ precio: { $lt : 30 } })
+```
+
+Encontramos que hay 1 libro que tiene un precio menor a 30.
+
+Listado de operadores relacionales:
+
+* `$eq` equal: igual
+* `$lt` low than: menor que
+* `$lte` low than equal: menor o igual que
+* `$gt` greater than: mayor que
+* `$gte` greater than equal: mayor o igual que
+* `$ne` not equal: distinto
+* `$in` in: dentro de
+* `$nin` not in: no dentro de
+
+Veamos con algunos ejemplos como utilizar estos operadores para recuperar documentos que cumplen determinadas condiciones.
+
+Recuperar todos los libros que tienen un precio mayor a 40:
+
+```
+db.libros.find({ precio: { $gt:40 }})
+```
+
+Recuperar todos los libros que en le campo cantidad tiene 50 o más:
+
+```
+db.libros.find( { cantidad: { $gte : 50 }})
+```
+
+Recuperar todos los libros que en le campo cantidad hay un valor distinto a 50:
+
+```
+db.libros.find( { cantidad: { $ne : 50 }})
+```
+
+Recuperar todos los libros cuyo precio estén comprendidos entre 20 y 45:
+
+```
+db.libros.find( { precio: { $gte : 20 , $lte : 45} })
+```
+
+Recuperar todos los libros de la editorial 'Planeta':
+
+```
+db.libros.find( { editorial: { $in : ['Planeta'] } })
+```
+
+Recuperar todos los libros que no pertenezcan a la editorial 'Planeta':
+
+```
+db.libros.find( { editorial: { $nin : ['Planeta'] } })
+```
+
+> __Nota__: estos operadores también se emplean cuando efectuemos borrados y modificaciones de documentos.
+
+### Borrar documentos de una colección con los métodos deleteOne() y deleteMany()
+
+Hemos visto en conceptos anteriores que podemos eliminar todos los documentos de una colección mediante el método deleteMany y pasando un objeto literal vacío:
+
+```
+db.libros.deleteMany({})
+```
+
+Aprendimos también a recuperar algunos documentos con el método `find()` empleando una serie de operadores relacionales, dichos operadores se pueden emplear en forma idéntica con los métodos `deleteMany()` y `deleteOne()`.
+
+Hay dos métodos para eliminar documentos:
+
+* `deleteMany()`: borra todos los documentos que cumplen la condición que le enviamos.
+* `deleteOne()`: borra el primer documento que cumple la condición que le pasamos.
+
+Partimos de los siguientes datos:
+
+```
+use biblioteca
+db.libros.drop()
+
+db.libros.insertOne(
+  {
+    _id: 1,  
+    titulo: 'El aleph',
+    autor: 'Borges',
+    editorial: ['Siglo XXI','Planeta'],
+    precio: 20,
+    cantidad: 50 
+  }
+)
+db.libros.insertOne(
+  {
+    _id: 2,  
+    titulo: 'Martin Fierro',
+    autor: 'Jose Hernandez',
+    editorial: ['Siglo XXI'],
+    precio: 50,
+    cantidad: 12
+  }
+)
+db.libros.insertOne(
+  {
+    _id: 3,  
+    titulo: 'Aprenda PHP',
+    autor: 'Mario Molina',
+    editorial: ['Siglo XXI','Planeta'],
+    precio: 50,
+    cantidad: 20
+  }
+)
+db.libros.insertOne(
+  {
+    _id: 4,  
+    titulo: 'Java en 10 minutos',
+    editorial: ['Siglo XXI'],
+    precio: 45,
+    cantidad: 1 
+  }
+)
+
+db.libros.find()
+```
+
+Si queremos eliminar el documento que almacena en el campo el `_id` con valor 1 luego podemos utilizar la sintaxis:
+
+```
+db.libros.deleteOne({_id: 1})
+```
+
+Lo más conveniente es utilizar el método `deleteOne()` ya que solo uno puede cumplir esa condición al ser la clave primaria del documento.
+
+Recordemos que la sintaxis alternativa para eliminar el documento con `_id` con valor 1 es:
+
+```
+db.libros.deleteOne({_id: { $eq : 1}})
+```
+
+Para borrar todos los libros que tienen un precio mayor o igual a 50 tenemos:
+
+```
+db.libros.deleteMany({precio : {$gte : 50 }})
+```
+
+### Modificar un documento mediante el método updateOne()
+
+Hemos visto en conceptos anteriores como insertar un documento en una colección, recuperar un documento, borrar un documento y nos está faltando otra operación fundamental que podemos hacer con un documento que es su modificación.
+
+Para modificar un documento en particular disponemos de un método llamado updateOne, veamos con un ejemplo algunas de sus posibilidades:
+
+```
+use biblioteca
+db.libros.drop()
+
+db.libros.insertOne(
+  {
+    _id: 1,  
+    titulo: 'El aleph',
+    autor: 'Borges',
+    editorial: ['Siglo XXI','Planeta'],
+    precio: 20,
+    cantidad: 50 
+  }
+)
+db.libros.insertOne(
+  {
+    _id: 2,  
+    titulo: 'Martin Fierro',
+    autor: 'Jose Hernandez',
+    editorial: ['Siglo XXI'],
+    precio: 50,
+    cantidad: 12
+  }
+)
+db.libros.insertOne(
+  {
+    _id: 3,  
+    titulo: 'Aprenda PHP',
+    autor: 'Mario Molina',
+    editorial: ['Siglo XXI','Planeta'],
+    precio: 50,
+    cantidad: 20
+  }
+)
+db.libros.insertOne(
+  {
+    _id: 4,  
+    titulo: 'Java en 10 minutos',
+    editorial: ['Siglo XXI'],
+    precio: 45,
+    cantidad: 1 
+  }
+)
+
+db.libros.find()
+```
+
+Con las bases de datos documentales tengamos en cuenta que los documentos pueden tener distintas cantidades de campos. Por ejemplo si queremos agregar el campo descripción al libro con '_id' 4 debemos utilizar la sintaxis:
+
+```
+db.libros.updateOne({_id: {$eq:4}} ,{$set : {descripcion: 'Cada unidad trata un tema fundamental de Java desde 0.'} })
+
+db.libros.find({_id: { $eq : 4}})
+```
+
+Luego de ejecutar tenemos el documento con `_id` igual a 4 que contiene un nuevo campo llamado 'descripcion' con el valor 'Cada unidad trata un tema fundamental de Java desde 0.':
+
+Si queremos eliminar un campo de un documento debemos emplear el operador de actualización `$unset`. Probemos ahora de eliminar el campo que acabamos de crear para el documento con `_id` igual a 4:
+
+```
+db.libros.updateOne({_id : {$eq:4}} , {$unset : {descripcion:''} })
+
+db.libros.find({_id: { $eq : 4}})
+```
+
+Luego de ejecutar el `updateOne()` tenemos que para el documento que tiene el `_id` igual a 4 se ha eliminado el campo `descripcion`:
+
+Es importante entender que mediante el operador `$unset` eliminamos el campo, en cambio si utilizamos el operador `$set` modificamos el contenido del campo, luego si ejecutamos:
+
+```
+db.libros.updateOne({_id : {$eq:4}} , {$set : {descripcion:''} })
+```
+
+El campo `descripcion` sigue existiendo y almacena una cadena de texto vacía, y si no existía se crea con una cadena vacía.
+
+Disponemos también de operadores de modificación para arreglos, veamos como podemos agregar y eliminar elementos en el arreglo `editorial`:
+
+```
+use biblioteca
+db.libros.drop()
+
+db.libros.insertOne(
+  {
+    _id: 1,  
+    titulo: 'El aleph',
+    autor: 'Borges',
+    editorial: ['Siglo XXI','Planeta'],
+    precio: 20,
+    cantidad: 50 
+  }
+)
+db.libros.insertOne(
+  {
+    _id: 2,  
+    titulo: 'Martin Fierro',
+    autor: 'Jose Hernandez',
+    editorial: ['Siglo XXI'],
+    precio: 50,
+    cantidad: 12
+  }
+)
+db.libros.insertOne(
+  {
+    _id: 3,  
+    titulo: 'Aprenda PHP',
+    autor: 'Mario Molina',
+    editorial: ['Siglo XXI','Planeta'],
+    precio: 50,
+    cantidad: 20
+  }
+)
+db.libros.insertOne(
+  {
+    _id: 4,  
+    titulo: 'Java en 10 minutos',
+    editorial: ['Siglo XXI'],
+    precio: 45,
+    cantidad: 1 
+  }
+)
+
+db.libros.find()
+```
+
+Por ejemplo, si queremos añadir una nueva edutorial al elemento con `_id` igual a 1:
+
+```
+db.libros.updateOne({_id : {$eq:1}} , {$push : {editorial:'Atlántida'} })
+
+db.libros.find({_id: { $eq : 1}})
+```
+
+Podemos ver que luego de ejecutarse el método `updateOne()` el arreglo `editorial` tiene una nueva componente para el documento con `_id` 1:
+
+De forma similar para eliminar un elemento del arreglo debemos emplear el operador `$pull`:
+
+```
+db.libros.updateOne({_id : {$eq:1}} , {$pull : {editorial:'Atlántida'} })
+
+db.libros.find({_id: { $eq : 1}})
+```
+
+### Modificar múltiples documentos con el método updateMany()
+
+Vimos en el concepto anterior que MongoDB nos provee de un método que nos permite modificar un único documento llamado `updateOne()`. El segundo método que nos permite actualizar documentos pero en forma masiva es el método `updateMany()`.
+
+Veamos con un ejemplo algunas variantes del método `updateMany()`:
+
+```
+use biblioteca
+db.libros.drop()
+
+db.libros.insertOne(
+  {
+    _id: 1,  
+    titulo: 'El aleph',
+    autor: 'Borges',
+    editorial: ['Siglo XXI','Planeta'],
+    precio: 20,
+    cantidad: 50 
+  }
+)
+db.libros.insertOne(
+  {
+    _id: 2,  
+    titulo: 'Martin Fierro',
+    autor: 'Jose Hernandez',
+    editorial: ['Siglo XXI'],
+    precio: 50,
+    cantidad: 12
+  }
+)
+db.libros.insertOne(
+  {
+    _id: 3,  
+    titulo: 'Aprenda PHP',
+    autor: 'Mario Molina',
+    editorial: ['Siglo XXI','Planeta'],
+    precio: 50,
+    cantidad: 20
+  }
+)
+db.libros.insertOne(
+  {
+    _id: 4,  
+    titulo: 'Java en 10 minutos',
+    editorial: ['Siglo XXI'],
+    precio: 45,
+    cantidad: 1 
+  }
+)
+
+db.libros.find()
+```
+
+Actualizar el campo `cantidad` a 0 de aquellos elementos con `_id` igual a 2:
+
+```
+db.libros.updateMany({_id : {$gt:2}} , {$set : {cantidad:0} })
+
+db.libros.find()
+```
+
+Actualizar el campo `faltantes` a `true` de aquellos elementos con `cantidad` igual a 0:
+
+```
+db.libros.updateMany({cantidad : {$eq:0}} , {$set : {faltantes:true} })
+
+db.libros.find()
+```
+
+Actualizar con todos los libros que almacenan en el campo `cantidad` el valor cero, eliminamos el campo faltantes y fijamos el campo cantidad con el valor 100:
+
+```
+db.libros.updateMany({cantidad : {$eq:0}} , {$unset : {faltantes:true}, $set:{cantidad: 100}} )
+
+db.libros.find()
+```
+
+> __Nota__: la ejecución del método `deleteOne()` y `deleteMany()` informa de la cantidad de documentos eliminados.
 
 [01]: ../img/ut08/01.png "01"
 [02]: ../img/ut08/02.jpg "02"
